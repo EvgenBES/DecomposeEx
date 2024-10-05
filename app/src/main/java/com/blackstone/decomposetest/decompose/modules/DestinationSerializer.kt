@@ -10,11 +10,11 @@ import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 
 @OptIn(ExperimentalSerializationApi::class)
-object DestinationSerializer : KSerializer<Destination> by polymorphicSerializer(
-    SerializersModule {
-        polymorphic(Destination::class) {
-            subclass(DetailsDestination::class, DetailsDestination.serializer())
-            subclass(CardsDestination::class, CardsDestination.serializer())
-        }
-    }
-)
+                object DestinationSerializer : KSerializer<Destination> by polymorphicSerializer(
+                    SerializersModule {
+                        polymorphic(Destination::class) {
+                            subclass(DetailsDestination::class, DetailsDestination.serializer())
+                            subclass(CardsDestination::class, CardsDestination.serializer())
+                        }
+                    }
+                )

@@ -20,7 +20,7 @@ fun MRootContent(component: MRootComponent) {
         component.slot,
         onDismiss = component::dismiss
     ) {
-        it.instance.componentContent().Content(Modifier)
+        it.instance.content.Content(Modifier)
     }
 
     ModalBottomSheetLayout(
@@ -32,7 +32,7 @@ fun MRootContent(component: MRootComponent) {
             modifier = Modifier.fillMaxSize(),
             animation = stackAnimation(slide() + scale()),
         ) {
-            it.instance.componentContent().Content(Modifier)
+            it.instance.content.Content(Modifier)
         }
     }
 
