@@ -1,0 +1,12 @@
+package com.decompose.cards.presentation.routing
+
+import com.decompose.cards.api.CardsRoute
+import com.decompose.navigation.Destination
+import org.koin.core.annotation.Factory
+
+@Factory
+internal class CardsRouteImpl : CardsRoute {
+    override fun navigate(): Destination {
+        return CardsDestination()
+    }
+}
