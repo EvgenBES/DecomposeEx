@@ -33,9 +33,8 @@ class DashboardContent(
         val activeConfig = childStack.active.configuration
 
         val tabs = remember { component.fetchTabs() }
-        val activeTab: NavTabItem = remember(activeConfig) {
+        val activeTab: NavTabItem? = remember(activeConfig) {
             tabs.find { it.destination == activeConfig }?.item
-                ?: error("Unknown active config $activeConfig")
         }
 
         Column(Modifier.fillMaxSize()) {
@@ -59,7 +58,7 @@ class DashboardContent(
 @Composable
 private fun BottomMenu(
     tabs: List<NavTab>,
-    activeTab: NavTabItem,
+    activeTab: NavTabItem?,
     onTabClick: (NavTab) -> Unit,
 ) {
     NavigationBar {

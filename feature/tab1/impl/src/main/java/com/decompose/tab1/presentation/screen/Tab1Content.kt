@@ -18,7 +18,8 @@ internal class Tab1Content(
     override fun Content(modifier: Modifier) {
         TabView(
             modifier = modifier,
-            onClick = component::navigateTo
+            onClick = component::navigateTo,
+            onDetails = component::navigateToDetails,
         )
     }
 }
@@ -27,6 +28,7 @@ internal class Tab1Content(
 private fun TabView(
     modifier: Modifier,
     onClick: () -> Unit = {},
+    onDetails: () -> Unit = {},
 ) {
     Column(
         modifier = modifier,
@@ -39,7 +41,11 @@ private fun TabView(
                 Text("Tab1")
 
                 Button(onClick = onClick) {
-                    Text("Click")
+                    Text("Click to Out List")
+                }
+
+                Button(onClick = onDetails) {
+                    Text("Click to Details BS")
                 }
             }
         }

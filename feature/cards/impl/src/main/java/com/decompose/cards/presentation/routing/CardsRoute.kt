@@ -6,7 +6,7 @@ import org.koin.core.annotation.Factory
 
 @Factory
 internal class CardsRouteImpl : CardsRoute {
-    override fun navigate(): Destination {
+    override fun destination(): Destination {
         return CardsDestination()
     }
 }

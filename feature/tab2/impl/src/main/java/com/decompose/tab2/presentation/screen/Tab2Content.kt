@@ -39,7 +39,7 @@ private fun TabView(
                 Text("Tab2")
 
                 Button(onClick = onClick) {
-                    Text("Click")
+                    Text("Click to In Details")
                 }
             }
         }

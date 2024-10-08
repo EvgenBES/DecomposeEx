@@ -16,7 +16,8 @@ fun MRootContent(component: MRootComponent) {
 
     val bottomSheetState = rememberSlotModalBottomSheetState(
         slot = component.slot,
-        onDismiss = component::dismiss
+        onDismiss = component::dismiss,
+        skipHalfExpanded = true,
     ) {
         it.instance.content.Content(Modifier)
     }

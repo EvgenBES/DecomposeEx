@@ -60,7 +60,7 @@ dependencies {
     ksp("io.insert-koin:koin-ksp-compiler:1.3.1")
 
     implementation(project(":common"))
-    implementation(project(":feature:details:api"))
+    implementation(project(":feature:cards:api"))
     implementation(project(":feature:dashboard:api"))
     implementation(project(":feature:tab1:api"))
 }
