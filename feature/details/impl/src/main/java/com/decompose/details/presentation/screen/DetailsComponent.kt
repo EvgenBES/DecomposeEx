@@ -10,7 +10,7 @@ internal class DetailsComponent(
     private val productId: String,
     private val router: DetailsRouter,
     componentContext: ComponentContext
-): ComponentContext by componentContext {
+): ComponentContext by componentContext, DetailsRouter by router {
 
     val uiState = MutableStateFlow(DetailsUiState(productId = productId))
 

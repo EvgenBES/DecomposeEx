@@ -4,5 +4,8 @@ import com.arkivanov.decompose.ComponentContext
 import com.decompose.di.ComponentFactory
 
 interface Destination {
-   fun factory(componentContext: ComponentContext, componentFactory: ComponentFactory): ComponentChild
+    fun factory(
+        componentContext: ComponentContext,
+        componentFactory: ComponentFactory
+    ): ComponentChild
 }

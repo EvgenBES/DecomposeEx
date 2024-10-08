@@ -9,7 +9,7 @@ import com.arkivanov.decompose.router.stack.replaceCurrent
 import com.decompose.common.NavControllers
 import com.decompose.navigation.Destination
 
-class RootRouter(private val navControllers: NavControllers<Destination, Destination>): Router {
+class DefaultRouter(private val navControllers: NavControllers<Destination, Destination>): Router {
     override fun push(destination: Destination) {
         navControllers.childNavigation.pushNew(destination)
     }
@@ -19,6 +19,7 @@ class RootRouter(private val navControllers: NavControllers<Destination, Destina
     }
 
     override fun replaceAll(destinations: List<Destination>) {
+        if (destinations.isEmpty()) return
         navControllers.childNavigation.replaceAll(*destinations.toTypedArray())
     }
 
@@ -33,6 +34,4 @@ class RootRouter(private val navControllers: NavControllers<Destination, Destina
     override fun dismiss() {
         navControllers.slotNavigation.dismiss()
     }
-
-
 }

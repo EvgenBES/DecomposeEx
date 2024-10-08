@@ -6,8 +6,6 @@ import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
-import com.arkivanov.decompose.extensions.compose.stack.animation.plus
-import com.arkivanov.decompose.extensions.compose.stack.animation.scale
 import com.arkivanov.decompose.extensions.compose.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
 import com.blackstone.decomposetest.decompose.modules.bottomSheet.rememberSlotModalBottomSheetState
@@ -17,7 +15,7 @@ import com.blackstone.decomposetest.decompose.modules.bottomSheet.rememberSlotMo
 fun MRootContent(component: MRootComponent) {
 
     val bottomSheetState = rememberSlotModalBottomSheetState(
-        component.slot,
+        slot = component.slot,
         onDismiss = component::dismiss
     ) {
         it.instance.content.Content(Modifier)
@@ -30,7 +28,7 @@ fun MRootContent(component: MRootComponent) {
         Children(
             stack = component.stack,
             modifier = Modifier.fillMaxSize(),
-            animation = stackAnimation(slide() + scale()),
+            animation = stackAnimation(slide()),
         ) {
             it.instance.content.Content(Modifier)
         }

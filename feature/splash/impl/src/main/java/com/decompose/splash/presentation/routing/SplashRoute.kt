@@ -1,40 +1,45 @@
-package com.decompose.details.presentation.routing
+package com.decompose.splash.presentation.routing
 
 import com.arkivanov.decompose.ComponentContext
-import com.decompose.details.presentation.screen.DetailsComponent
-import com.decompose.details.presentation.screen.DetailsContent
 import com.decompose.di.ComponentFactory
 import com.decompose.navigation.ComponentChild
 import com.decompose.navigation.ComponentContent
 import com.decompose.navigation.Destination
+import com.decompose.splash.api.SplashRoute
+import com.decompose.splash.presentation.screen.SplashComponent
+import com.decompose.splash.presentation.screen.SplashContent
 import kotlinx.serialization.Serializable
+import org.koin.core.annotation.Factory
 import org.koin.core.component.get
 
+@Factory
+internal class SplashRouteImpl : SplashRoute {
+    override fun destination(): Destination {
+        return SplashDestination()
+    }
+}
+
 @Serializable
-class DetailsDestination(private val productId: String) : Destination {
+class SplashDestination : Destination {
     override fun factory(
         componentContext: ComponentContext,
         componentFactory: ComponentFactory
     ): ComponentChild {
-        return DetailsContentProvider(
-            productId = productId,
+        return SplashContentProvider(
             router = componentFactory.get(),
             componentContext = componentContext
         )
     }
 }
 
-private class DetailsContentProvider(
-    private val productId: String,
-    private val router: DetailsRouter,
+private class SplashContentProvider(
+    private val router: SplashRouter,
     componentContext: ComponentContext
 ) : ComponentChild {
-    override val content: ComponentContent = DetailsContent(
-        DetailsComponent(
-            productId = productId,
+    override val content: ComponentContent = SplashContent(
+        SplashComponent(
             router = router,
             componentContext = componentContext
         )
     )
 }
-
