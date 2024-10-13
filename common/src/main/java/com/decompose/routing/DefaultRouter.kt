@@ -7,7 +7,6 @@ import com.arkivanov.decompose.router.stack.pushNew
 import com.arkivanov.decompose.router.stack.replaceAll
 import com.arkivanov.decompose.router.stack.replaceCurrent
 import com.decompose.common.NavControllers
-import com.decompose.navigation.Destination
 
 class DefaultRouter(private val navControllers: NavControllers<Destination, Destination>): Router {
     override fun push(destination: Destination) {

@@ -1,6 +1,6 @@
 package com.decompose.dashboard.api
 
-import com.decompose.navigation.Destination
+import com.decompose.routing.Destination
 
 interface DashboardRoute {
     fun destination(): Destination

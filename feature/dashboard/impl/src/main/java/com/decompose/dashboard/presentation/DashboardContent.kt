@@ -20,8 +20,8 @@ import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
-import com.decompose.dashboard.api.NavTab
-import com.decompose.dashboard.api.NavTabItem
+import com.decompose.dashboard.api.DashboardNavTab
+import com.decompose.navTab.NavTabItem
 import com.decompose.navigation.ComponentContent
 
 class DashboardContent(
@@ -57,9 +57,9 @@ class DashboardContent(
 
 @Composable
 private fun BottomMenu(
-    tabs: List<NavTab>,
+    tabs: List<DashboardNavTab>,
     activeTab: NavTabItem?,
-    onTabClick: (NavTab) -> Unit,
+    onTabClick: (DashboardNavTab) -> Unit,
 ) {
     NavigationBar {
         Row{

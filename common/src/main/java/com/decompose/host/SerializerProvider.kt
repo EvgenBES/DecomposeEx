@@ -1,6 +1,6 @@
 package com.decompose.host
 
-import com.decompose.navigation.Destination
+import com.decompose.routing.Destination
 import kotlinx.serialization.KSerializer
 
 interface SerializerProvider {

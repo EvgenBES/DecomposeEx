@@ -4,7 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.decompose.di.ComponentFactory
 import com.decompose.navigation.ComponentChild
 import com.decompose.navigation.ComponentContent
-import com.decompose.navigation.Destination
+import com.decompose.routing.Destination
 import com.decompose.tab2.api.Tab1Route
 import com.decompose.tab1.presentation.screen.Tab1Component
 import com.decompose.tab1.presentation.screen.Tab1Content

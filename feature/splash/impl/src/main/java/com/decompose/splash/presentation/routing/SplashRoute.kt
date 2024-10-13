@@ -4,7 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.decompose.di.ComponentFactory
 import com.decompose.navigation.ComponentChild
 import com.decompose.navigation.ComponentContent
-import com.decompose.navigation.Destination
+import com.decompose.routing.Destination
 import com.decompose.splash.api.SplashRoute
 import com.decompose.splash.presentation.screen.SplashComponent
 import com.decompose.splash.presentation.screen.SplashContent

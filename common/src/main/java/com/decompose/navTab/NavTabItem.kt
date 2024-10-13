@@ -1,4 +1,4 @@
-package com.decompose.dashboard.api
+package com.decompose.navTab
 
 interface NavTabItem {
     val unselectedIconId: Int

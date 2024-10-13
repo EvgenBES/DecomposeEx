@@ -1,6 +1,6 @@
 package com.decompose.splash.api
 
-import com.decompose.navigation.Destination
+import com.decompose.routing.Destination
 
 interface SplashRoute {
     fun destination(): Destination

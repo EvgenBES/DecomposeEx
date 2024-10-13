@@ -1,20 +1,19 @@
 package com.decompose.tab1.presentation.tab
 
-import com.decompose.dashboard.api.NavTab
-import com.decompose.dashboard.api.NavTabItem
+import com.decompose.dashboard.api.DashboardNavTab
 import com.decompose.details.impl.R
-import com.decompose.navigation.Destination
+import com.decompose.navTab.NavTabItem
+import com.decompose.routing.Destination
 import com.decompose.tab1.presentation.routing.Tab1Destination
 import org.koin.core.annotation.Factory
 
 private const val TabPosition = 0
 
 @Factory
-internal class Tab1 : NavTab {
+internal class Tab1 : DashboardNavTab {
     override val position: Int = TabPosition
     override val destination: Destination = Tab1Destination()
     override val item: NavTabItem = Tab1Item()
-    override val isAvailable: Boolean = true
 }
 
 private class Tab1Item : NavTabItem {

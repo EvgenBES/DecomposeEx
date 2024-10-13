@@ -1,7 +1,7 @@
 package com.decompose.tab2.presentation.routing
 
 import com.decompose.details.api.DetailsRoute
-import com.decompose.routing.TabRouter
+import com.decompose.routing.Router
 import org.koin.core.annotation.Factory
 import java.util.UUID
 
@@ -11,11 +11,11 @@ internal interface Tab2Router {
 
 @Factory
 internal class Tab2RouterImpl(
-    private val tabRouter: TabRouter,
+    private val router: Router,
     private val detailsRoute: DetailsRoute
 ) : Tab2Router {
     override fun navigateTo() {
-        tabRouter.push(detailsRoute.navigate(context = UUID.randomUUID().toString()))
+        router.push(detailsRoute.navigate(context = UUID.randomUUID().toString()))
     }
 }
 

@@ -13,11 +13,10 @@ import com.arkivanov.essenty.lifecycle.doOnDestroy
 import com.decompose.common.NavControllers
 import com.decompose.di.ComponentFactory
 import com.decompose.navigation.ComponentChild
-import com.decompose.navigation.Destination
+import com.decompose.routing.Destination
 import com.decompose.routing.DefaultRouter
 import com.decompose.routing.Router
 import com.decompose.splash.presentation.routing.SplashDestination
-import org.koin.core.component.get
 import org.koin.dsl.module
 
 class MRootComponent(

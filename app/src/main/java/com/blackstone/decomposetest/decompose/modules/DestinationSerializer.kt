@@ -5,7 +5,7 @@ import com.decompose.cards.presentation.routing.CardsDestination
 import com.decompose.dashboard.presentation.routing.DashboardDestination
 import com.decompose.details.presentation.routing.DetailsDestination
 import com.decompose.host.SerializerProvider
-import com.decompose.navigation.Destination
+import com.decompose.routing.Destination
 import com.decompose.splash.presentation.routing.SplashDestination
 import com.decompose.tab1.presentation.routing.Tab1Destination
 import com.decompose.tab2.presentation.routing.Tab2Destination

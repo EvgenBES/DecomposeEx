@@ -1,6 +1,6 @@
 package com.decompose.cards.api
 
-import com.decompose.navigation.Destination
+import com.decompose.routing.Destination
 
 interface CardsRoute {
     fun destination(): Destination

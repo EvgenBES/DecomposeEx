@@ -12,7 +12,7 @@ import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.lifecycle.doOnDestroy
 import com.decompose.di.ComponentFactory
 import com.decompose.navigation.ComponentChild
-import com.decompose.navigation.Destination
+import com.decompose.routing.Destination
 import com.decompose.routing.Router
 import org.koin.core.component.get
 import org.koin.core.module.Module

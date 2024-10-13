@@ -6,7 +6,7 @@ import com.decompose.cards.presentation.screen.CardsContent
 import com.decompose.di.ComponentFactory
 import com.decompose.navigation.ComponentChild
 import com.decompose.navigation.ComponentContent
-import com.decompose.navigation.Destination
+import com.decompose.routing.Destination
 import kotlinx.serialization.Serializable
 import org.koin.core.component.get
 
