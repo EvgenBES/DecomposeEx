@@ -9,11 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.decompose.navigation.ComponentContent
+import com.decompose.navigation.ComponentScreen
 
-internal class Tab1Content(
+internal class Tab1Screen(
     private val component: Tab1Component
-) : ComponentContent {
+) : ComponentScreen {
     @Composable
     override fun Content(modifier: Modifier) {
         TabView(

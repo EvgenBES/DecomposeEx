@@ -9,11 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.decompose.navigation.ComponentContent
+import com.decompose.navigation.ComponentScreen
 
-internal class SplashContent(
+internal class SplashScreen(
     private val component: SplashComponent
-) : ComponentContent {
+) : ComponentScreen {
     @Composable
     override fun Content(modifier: Modifier) {
 

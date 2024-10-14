@@ -1,4 +1,4 @@
-package com.blackstone.decomposetest.decompose.modules.bottomSheet
+package com.decompose.bottomSheet
 
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer

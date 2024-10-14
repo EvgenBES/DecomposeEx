@@ -3,10 +3,10 @@ package com.decompose.details.presentation.routing
 import com.arkivanov.decompose.ComponentContext
 import com.decompose.details.api.DetailsRoute
 import com.decompose.details.presentation.screen.DetailsComponent
-import com.decompose.details.presentation.screen.DetailsContent
+import com.decompose.details.presentation.screen.DetailsScreen
 import com.decompose.di.ComponentFactory
 import com.decompose.navigation.ComponentChild
-import com.decompose.navigation.ComponentContent
+import com.decompose.navigation.ComponentScreen
 import com.decompose.routing.Destination
 import kotlinx.serialization.Serializable
 import org.koin.core.annotation.Factory
@@ -20,7 +20,7 @@ internal class DetailsRouteImpl : DetailsRoute {
 }
 
 @Serializable
-class DetailsDestination(private val productId: String) : Destination {
+internal class DetailsDestination(private val productId: String) : Destination {
     override fun factory(
         componentContext: ComponentContext,
         componentFactory: ComponentFactory
@@ -38,7 +38,7 @@ private class DetailsContentProvider(
     private val router: DetailsRouter,
     componentContext: ComponentContext
 ) : ComponentChild {
-    override val content: ComponentContent = DetailsContent(
+    override val screen: ComponentScreen = DetailsScreen(
         DetailsComponent(
             productId = productId,
             router = router,

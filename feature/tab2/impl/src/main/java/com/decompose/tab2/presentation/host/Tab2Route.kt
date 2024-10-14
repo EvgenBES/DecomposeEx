@@ -1,44 +1,41 @@
-package com.decompose.tab2.presentation.routing
+package com.decompose.tab2.presentation.host
 
 import com.arkivanov.decompose.ComponentContext
 import com.decompose.di.ComponentFactory
 import com.decompose.navigation.ComponentChild
-import com.decompose.navigation.ComponentContent
+import com.decompose.navigation.ComponentScreen
 import com.decompose.routing.Destination
 import com.decompose.tab2.api.Tab2Route
-import com.decompose.tab2.presentation.screen.Tab2Component
-import com.decompose.tab2.presentation.screen.Tab2Content
 import kotlinx.serialization.Serializable
 import org.koin.core.annotation.Factory
-import org.koin.core.component.get
 
 @Factory
 internal class Tab2RouteImpl : Tab2Route {
-    override fun navigate(): Destination {
+    override fun destination(): Destination {
         return Tab2Destination()
     }
 }
 
 @Serializable
-class Tab2Destination : Destination {
+internal class Tab2Destination : Destination {
     override fun factory(
         componentContext: ComponentContext,
         componentFactory: ComponentFactory
     ): ComponentChild {
         return Tab2ContentProvider(
-            router = componentFactory.get(),
+            componentFactory = componentFactory,
             componentContext = componentContext
         )
     }
 }
 
 private class Tab2ContentProvider(
-    router: Tab2Router,
+    componentFactory: ComponentFactory,
     componentContext: ComponentContext
 ) : ComponentChild {
-    override val content: ComponentContent = Tab2Content(
+    override val screen: ComponentScreen = Tab2Host(
         Tab2Component(
-            router = router,
+            componentFactory = componentFactory,
             componentContext = componentContext
         )
     )

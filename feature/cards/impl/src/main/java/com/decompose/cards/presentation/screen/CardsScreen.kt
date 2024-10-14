@@ -11,11 +11,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
-import com.decompose.navigation.ComponentContent
+import com.decompose.navigation.ComponentScreen
 
-internal class CardsContent(
+internal class CardsScreen(
     private val component: CardsComponent
-) : ComponentContent {
+) : ComponentScreen {
     @Composable
     override fun Content(modifier: Modifier) {
         val state by component.uiState.collectAsState()

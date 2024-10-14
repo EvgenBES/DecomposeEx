@@ -1,5 +1,5 @@
 package com.decompose.navigation
 
 interface ComponentChild {
-    val content: ComponentContent
+    val screen: ComponentScreen
 }

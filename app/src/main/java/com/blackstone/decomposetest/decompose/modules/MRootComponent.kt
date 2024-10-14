@@ -10,11 +10,10 @@ import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.lifecycle.doOnDestroy
-import com.decompose.common.NavControllers
 import com.decompose.di.ComponentFactory
 import com.decompose.navigation.ComponentChild
-import com.decompose.routing.Destination
 import com.decompose.routing.DefaultRouter
+import com.decompose.routing.Destination
 import com.decompose.routing.Router
 import com.decompose.splash.presentation.routing.SplashDestination
 import org.koin.dsl.module
@@ -23,11 +22,11 @@ class MRootComponent(
     private val componentFactory: ComponentFactory,
     private val componentContext: ComponentContext,
     private val startDestination: Destination = SplashDestination()
-): ComponentContext by componentContext  {
+) : ComponentContext by componentContext {
 
     private val childNavigation = StackNavigation<Destination>()
     private val slotNavigation = SlotNavigation<Destination>()
-    private val route = DefaultRouter(NavControllers(childNavigation, slotNavigation))
+    private val route = DefaultRouter(childNavigation, slotNavigation)
     private val module = module { single<Router> { route } }
 
     init {

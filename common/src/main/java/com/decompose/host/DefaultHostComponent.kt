@@ -9,32 +9,20 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
-import com.arkivanov.essenty.lifecycle.doOnDestroy
 import com.decompose.di.ComponentFactory
 import com.decompose.navigation.ComponentChild
 import com.decompose.routing.Destination
-import com.decompose.routing.Router
-import org.koin.core.component.get
-import org.koin.core.module.Module
 
-abstract class DefaultHostComponent(
+class DefaultHostComponent(
     private val startDestination: Destination,
     private val componentFactory: ComponentFactory,
-    serializerProvider: SerializerProvider = componentFactory.get(),
+    private val childNavigation: StackNavigation<Destination>,
+    private val slotNavigation: SlotNavigation<Destination>,
+    serializerProvider: SerializerProvider,
     componentContext: ComponentContext
-) : ComponentContext by componentContext {
+) : HostComponent, ComponentContext by componentContext {
 
-    protected val childNavigation = StackNavigation<Destination>()
-    protected val slotNavigation = SlotNavigation<Destination>()
-    abstract val route: Router
-    abstract val module: Module
-
-    init {
-        componentFactory.loadModule(module)
-        componentContext.doOnDestroy { componentFactory.unloadModule(module) }
-    }
-
-    val stack: Value<ChildStack<*, ComponentChild>> = childStack(
+    override val stack: Value<ChildStack<*, ComponentChild>> = childStack(
         source = childNavigation,
         serializer = serializerProvider.serializer,
         initialStack = { listOf(startDestination) },
@@ -42,14 +30,14 @@ abstract class DefaultHostComponent(
         childFactory = ::childBuilder
     )
 
-    val slot: Value<ChildSlot<*, ComponentChild>> = childSlot(
+    override val slot: Value<ChildSlot<*, ComponentChild>> = childSlot(
         source = slotNavigation,
         serializer = serializerProvider.serializer,
         handleBackButton = true,
         childFactory = ::childBuilder
     )
 
-    fun dismiss() {
+    override fun dismiss() {
         slotNavigation.dismiss()
     }
 

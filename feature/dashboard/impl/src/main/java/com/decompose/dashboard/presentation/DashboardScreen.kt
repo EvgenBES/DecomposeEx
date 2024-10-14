@@ -22,11 +22,11 @@ import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
 import com.decompose.dashboard.api.DashboardNavTab
 import com.decompose.navTab.NavTabItem
-import com.decompose.navigation.ComponentContent
+import com.decompose.navigation.ComponentScreen
 
-class DashboardContent(
+class DashboardScreen(
     private val component: DashboardComponent
-) : ComponentContent {
+) : ComponentScreen {
     @Composable
     override fun Content(modifier: Modifier) {
         val childStack by component.stack.subscribeAsState()
@@ -43,7 +43,7 @@ class DashboardContent(
                 stack = childStack,
                 animation = stackAnimation(slide())
             ) {
-                it.instance.content.Content(Modifier)
+                it.instance.screen.Content(Modifier)
             }
 
             BottomMenu(

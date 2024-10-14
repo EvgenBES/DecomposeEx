@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.slide
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
-import com.blackstone.decomposetest.decompose.modules.bottomSheet.rememberSlotModalBottomSheetState
+import com.decompose.bottomSheet.rememberSlotModalBottomSheetState
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -19,7 +19,7 @@ fun MRootContent(component: MRootComponent) {
         onDismiss = component::dismiss,
         skipHalfExpanded = true,
     ) {
-        it.instance.content.Content(Modifier)
+        it.instance.screen.Content(Modifier)
     }
 
     ModalBottomSheetLayout(
@@ -31,7 +31,7 @@ fun MRootContent(component: MRootComponent) {
             modifier = Modifier.fillMaxSize(),
             animation = stackAnimation(slide()),
         ) {
-            it.instance.content.Content(Modifier)
+            it.instance.screen.Content(Modifier)
         }
     }
 

@@ -3,10 +3,10 @@ package com.decompose.dashboard.presentation.routing
 import com.arkivanov.decompose.ComponentContext
 import com.decompose.dashboard.api.DashboardRoute
 import com.decompose.dashboard.presentation.DashboardComponent
-import com.decompose.dashboard.presentation.DashboardContent
+import com.decompose.dashboard.presentation.DashboardScreen
 import com.decompose.di.ComponentFactory
 import com.decompose.navigation.ComponentChild
-import com.decompose.navigation.ComponentContent
+import com.decompose.navigation.ComponentScreen
 import com.decompose.routing.Destination
 import kotlinx.serialization.Serializable
 import org.koin.core.annotation.Factory
@@ -36,7 +36,7 @@ private class DashboardContentProvider(
     componentFactory: ComponentFactory,
     componentContext: ComponentContext
 ) : ComponentChild {
-    override val content: ComponentContent = DashboardContent(
+    override val screen: ComponentScreen = DashboardScreen(
         DashboardComponent(
             dependencies = componentFactory.get(),
             componentFactory = componentFactory,
