@@ -1,5 +1,6 @@
 package com.decompose.details.presentation.screen
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -23,7 +24,8 @@ internal class DetailsScreen(
         DetailsView(
             state = state,
             modifier = modifier,
-            onClick = component::navigateTo
+            onClick = component::navigateTo,
+            onDismiss = component::dismiss,
         )
     }
 }
@@ -33,6 +35,7 @@ private fun DetailsView(
     state: DetailsUiState,
     modifier: Modifier,
     onClick: () -> Unit = {},
+    onDismiss: () -> Unit = {},
 ) {
     Column(
         modifier = modifier,
@@ -41,11 +44,17 @@ private fun DetailsView(
             modifier = Modifier.padding(48.dp),
             contentAlignment = Alignment.Center
         ) {
-            Column {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
                 Text("Selected item: \n ${state.productId}")
 
                 Button(onClick = onClick) {
                     Text("Click by Yana")
+                }
+
+                Button(onClick = onDismiss) {
+                    Text("On Dismiss")
                 }
             }
         }

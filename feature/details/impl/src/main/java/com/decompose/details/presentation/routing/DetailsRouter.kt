@@ -7,6 +7,7 @@ import java.util.UUID
 
 internal interface DetailsRouter {
     fun navigateTo()
+    fun dismiss()
 }
 
 @Factory
@@ -16,6 +17,10 @@ internal class DetailsRouterImpl(
 ) : DetailsRouter {
     override fun navigateTo() {
         router.push(detailsRoute.navigate(context = UUID.randomUUID().toString()))
+    }
+
+    override fun dismiss() {
+        router.dismiss()
     }
 }
 
