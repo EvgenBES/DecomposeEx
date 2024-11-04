@@ -73,6 +73,8 @@ dependencies {
     implementation("io.insert-koin:koin-annotations:1.3.1")
     ksp("io.insert-koin:koin-ksp-compiler:1.3.1")
 
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.1")
+
     implementation(project(":common"))
     implementation(project(":feature:splash:api"))
     implementation(project(":feature:splash:impl"))
