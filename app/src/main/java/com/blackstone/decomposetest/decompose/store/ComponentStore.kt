@@ -1,30 +1,48 @@
 package com.blackstone.decomposetest.decompose.store
 
+import android.util.Log
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.essenty.lifecycle.Lifecycle
-import kotlinx.serialization.Serializable
-
-@Serializable
-data class ResultContainer<T>(val value: T)
 
 interface ComponentStore {
-    fun <T> setStoreResultListener(
+    fun setStoreResultListener(
         requestKey: String,
         lifecycle: Lifecycle,
-        listener: (result: ResultContainer<T>) -> Unit,
+        listener: ComponentResultListener,
     )
 
-    fun <T> setStoreResult(requestKey: String, result: ResultContainer<T>)
+    fun setStoreResult(requestKey: String, result: String)
 }
 
-fun <T>ComponentStore.setStoreResultListener(
+inline fun <reified R : Any> ComponentStore.setStoreResultListener(
     requestKey: String,
-    listener: (result: ResultContainer<T>) -> Unit,
+    crossinline listener: (result: R) -> Unit,
 ) {
     val lifecycle = (this as? ComponentContext)?.lifecycle
     if (lifecycle != null) {
         setStoreResultListener(requestKey, lifecycle) { result ->
-            listener(result)
+            runCatching {
+                listener.invoke(result.deserialize<R>())
+            }.also {
+                (result as? R)?.let(listener)
+
+                if (it.isFailure) {
+                    Log.e("ComponentStore", "SetStoreResultListener error ${it.exceptionOrNull()?.message}")
+                }
+            }
+        }
+    }
+}
+
+inline fun <reified R : Any> ComponentStore.setStoreResult(
+    requestKey: String,
+    result: R,
+) {
+    runCatching {
+        setStoreResult(requestKey, result.serialize())
+    }.also {
+        if (it.isFailure) {
+            Log.e("ComponentStore","setStoreResult error ${it.exceptionOrNull()?.message}")
         }
     }
 }

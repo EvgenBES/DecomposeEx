@@ -1,8 +1,11 @@
 package com.blackstone.decomposetest.decompose.koin.featureC
 
+import android.util.Log
 import com.arkivanov.decompose.ComponentContext
+import com.blackstone.decomposetest.decompose.koin.featureA.Result1
 import com.blackstone.decomposetest.decompose.store.ComponentStore
-import com.blackstone.decomposetest.decompose.store.ResultContainer
+import com.blackstone.decomposetest.decompose.store.setStoreResult
+import com.blackstone.decomposetest.decompose.store.setStoreResultListener
 import com.decompose.di.ComponentFactory
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -39,6 +42,18 @@ class FeatureCComponent(
     init {
         // load something
         dependencies.useCase3.load()
+
+        setStoreResultListener<Result1>("KEY1") {
+            Log.e("AAQQ", "Result1: $it")
+        }
+
+        setStoreResultListener<String>("KEY2") {
+            Log.e("AAQQ", "Result2: $it")
+        }
+
+        setStoreResultListener<Boolean>("KEY3") {
+            Log.e("AAQQ", "Result3: $it")
+        }
     }
 
     fun updateInput(value: String) = uiState.update { it.copy(inputText = value) }
@@ -46,8 +61,6 @@ class FeatureCComponent(
     fun getUserName() = args.userName
 
     fun navigateBackClicked() {
-        setStoreResult("YOUR_RESULT_KEY", ResultContainer(uiState.value.inputText))
-
         navigateBack()
     }
 }

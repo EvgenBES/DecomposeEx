@@ -3,48 +3,49 @@ package com.blackstone.decomposetest.decompose.store
 import android.os.Bundle
 import android.os.Parcelable
 import com.arkivanov.essenty.lifecycle.Lifecycle
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import java.util.Collections
 
 class ComponentStoreImpl : ComponentStore {
-    private val json: Json by lazy {
-        Json {
-            isLenient = true
-            allowStructuredMapKeys = true
-            ignoreUnknownKeys = true
-        }
-    }
 
     private val mResults: MutableMap<String, String> = Collections.synchronizedMap(HashMap())
     private val mResultListeners: MutableMap<String, ComponentResultListener> = Collections.synchronizedMap(HashMap())
 
-    @Suppress("UNCHECKED_CAST")
-    override fun <T> setStoreResultListener(
+    override fun setStoreResultListener(
         requestKey: String,
         lifecycle: Lifecycle,
-        listener: (result: ResultContainer<T>) -> Unit,
+        listener: ComponentResultListener,
     ) {
-        // once we are started, check for any stored results
-        val storedResult = mResults[requestKey]
-        if (storedResult != null) {
-            // if there is a result, fire the callback
-            listener(storedResult.deserialize())
-            // and clear the result
-            clearResult(requestKey)
+        if (lifecycle.state == Lifecycle.State.DESTROYED) return
+
+        val observer = object : Lifecycle.Callbacks {
+            override fun onStart() {
+                super.onStart()
+                val storedResult = mResults[requestKey]
+                if (storedResult != null) {
+                    listener.onResult(storedResult)
+                    clearResult(requestKey)
+                }
+            }
+
+            override fun onDestroy() {
+                super.onDestroy()
+                lifecycle.unsubscribe(this)
+                clearResultListener(requestKey)
+            }
         }
 
-        setComponentResultListener(requestKey, listener as (ResultContainer<*>) -> Unit)
+        lifecycle.subscribe(observer)
+        setComponentResultListener(requestKey, listener)
     }
 
-    override fun <T> setStoreResult(requestKey: String, result: ResultContainer<T>) {
+    override fun setStoreResult(requestKey: String, result: String) {
         val resultListener: ComponentResultListener? = mResultListeners[requestKey]
         // if there is and it is started, fire the callback
         if (resultListener != null) {
             resultListener.onResult(result)
         } else {
             // else, save the result for later
-            mResults[requestKey] = result.serialize()
+            mResults[requestKey] = result
         }
     }
 
@@ -61,7 +62,7 @@ class ComponentStoreImpl : ComponentStore {
         val bundle = Bundle()
 
         for (resultName in mResults.keys) {
-            bundle.putString(RESULT_KEY_PREFIX + resultName, mResults[resultName]?.serialize().orEmpty())
+            bundle.putString(RESULT_KEY_PREFIX + resultName, mResults[resultName].orEmpty())
         }
 
         return bundle
@@ -93,14 +94,6 @@ class ComponentStoreImpl : ComponentStore {
 
     private fun clearResult(requestKey: String) {
         mResults.remove(requestKey)
-    }
-
-    private inline fun <reified T : Any> T.serialize(): String {
-        return json.encodeToString(this)
-    }
-
-    private inline fun <reified T : Any> String.deserialize(): T {
-        return json.decodeFromString(this)
     }
 
     companion object {

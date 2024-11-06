@@ -1,9 +1,8 @@
 package com.blackstone.decomposetest.decompose.koin.featureB
 
-import android.util.Log
 import com.arkivanov.decompose.ComponentContext
 import com.blackstone.decomposetest.decompose.store.ComponentStore
-import com.blackstone.decomposetest.decompose.store.ResultContainer
+import com.blackstone.decomposetest.decompose.store.setStoreResult
 import com.blackstone.decomposetest.decompose.store.setStoreResultListener
 import com.decompose.di.ComponentFactory
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,8 +34,8 @@ class FeatureBComponent(
     val uiState = MutableStateFlow(FeatureBUiState())
 
     init {
-        setStoreResultListener<String>("YOUR_RESULT_KEY") { result ->
-            uiState.update { it.copy(result = result.value) }
+        setStoreResultListener<Boolean>("YOUR_RESULT_KEY") { result ->
+            uiState.update { it.copy(result = result.toString()) }
         }
     }
 
@@ -45,6 +44,8 @@ class FeatureBComponent(
     }
 
     fun navigateToFeatureC() {
+        setStoreResult("KEY2", result = "blue smile")
+        setStoreResult("KEY3", result = false)
         val userName = dependencies.repository.fetchUserName()
         navigator.navigateToFeatureC(userName)
     }
